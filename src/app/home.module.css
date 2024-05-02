@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    gap: 100px;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.textContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-size: 35px;
+    margin: 0;
+    text-align: center;
+}
+
+.description{
+    font-size: 15px;
+    color: #8198ae;
+    /* margin: 15px 0 40px 0; */
+}
+
+.brands{
+    width: 500px;
+    height: 50px;
+    position: relative;
+    filter: grayscale(1);
+}
+
