@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
+    fullname:{
+        type: String,
+        required: true,
+        min : 3,
+        max : 20
+    },
     username: {
         type: String,
         required: true,
@@ -15,7 +21,6 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
     },
     img: {
         type: String,
@@ -26,9 +31,6 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: String,   
-    },
-    address: {
-        type: String,
     },
 }
 , { timestamps: true }
@@ -69,5 +71,5 @@ const eventSchema = new mongoose.Schema({
 { timestamps: true }
 );
 
-export const User = mongoose.models.User || mongoose.model('User', userSchema);
-export const Event = mongoose.models.Event || mongoose.model('Event', eventSchema);
+export const User = mongoose.models?.User || mongoose.model('User', userSchema);
+export const Event = mongoose.models?.Event || mongoose.model('Event', eventSchema);

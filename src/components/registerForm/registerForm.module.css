@@ -1,11 +1,11 @@
-.form{
+.form {
   display: flex;
   flex-direction: column;
   text-align: center;
   gap: 30px;
 }
 
-.form input{
+.form input {
   padding: 20px;
   background-color: var(--bg);
   color: var(--textColor);
@@ -13,7 +13,7 @@
   border-radius: 5px;
 }
 
-.form button{
+.form button {
   padding: 20px;
   cursor: pointer;
   background-color: var(--btn);
@@ -22,3 +22,16 @@
   border: none;
   border-radius: 5px;
 }
+
+/* .imgInput {
+  display: none;
+}
+
+.imgButton {
+  background: #0450d5;
+  color: white;
+  line-height: 1.2;
+  padding: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+} */

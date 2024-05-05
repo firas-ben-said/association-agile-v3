@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     gap: 100px;
     width: 50%;
@@ -7,7 +7,7 @@
     margin-top: 50px;
 }
 
-.textContainer{
+.textContainer {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -15,22 +15,60 @@
     align-items: center;
 }
 
-.title{
+.title {
     font-size: 35px;
     margin: 0;
     text-align: center;
 }
 
-.description{
+.description {
     font-size: 15px;
     color: #8198ae;
     /* margin: 15px 0 40px 0; */
 }
 
-.brands{
+.brands {
     width: 500px;
     height: 50px;
     position: relative;
     filter: grayscale(1);
 }
 
+.buttons{
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    background-color: #3a9fff;
+    border-radius: 20px;
+    padding: 10px 25px;
+    color: var(--text);
+    transition: all 0.4s;
+    cursor: pointer;
+    box-shadow: 0px 25px 18px -6px rgba(0, 0, 0, 0.2);
+    border: none;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+}
+
+.btn:hover {
+    box-shadow: 0px 25px 18px -6px rgba(0, 0, 0, 0.2);
+    background-color: #63b2fc;
+    color: var(--text);
+}
+
+.btnContact{
+    background-color:transparent;
+    color: #a4b7c8;
+    box-shadow: none;
+    border:1px solid #c9d9e9;
+}
+
+.btnContact:hover{
+    background-color:transparent;
+    box-shadow: none;
+    border:1px solid #8198ae;
+}
