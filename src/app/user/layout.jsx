@@ -4,7 +4,7 @@ import Navbar from "@/components/dashboard/navbar/navbar";
 import Sidebar from "@/components/dashboard/sidebar/sidebar";
 
 
-export default function AdminLayout ({children}) {
+const Layout = ({children}) => {
     return (
         <div className={styles.container}>
             <div className={styles.menu}>
@@ -18,3 +18,5 @@ export default function AdminLayout ({children}) {
         </div>
     )
 }
+
+export default Layout;

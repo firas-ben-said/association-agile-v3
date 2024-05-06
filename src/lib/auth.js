@@ -5,6 +5,7 @@ import { User } from "./models";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { authConfig } from "./auth.config";
+import { isAbsoluteUrl } from "next/dist/shared/lib/utils";
 
 const login = async (credentials) => {
     try {
@@ -61,6 +62,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                             username: profile.login,
                             email: profile.email,
                             img: profile.avatar_url,
+                            isAdmin: profile.site_admin,
                         })
                         await newUser.save();
                     }

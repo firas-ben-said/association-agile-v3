@@ -9,7 +9,9 @@ import Search from "@/components/dashboard/search/search";
 
 const UsersPage = async ({ searchParams }) => {
   const q = searchParams?.query || "";
-  
+  console.log(q);
+  // const page = searchParams?.page || 1;
+  // const {count, users} = await getUsers(q, page);
   const users = await getUsers(q);
 
   return (

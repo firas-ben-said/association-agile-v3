@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styles from "./Links.module.css";
 import NavLink from "./navLink/NavLink";
-import { handleGithubLogout } from "@/lib/actions";
+import { handleGithubLogout} from "@/lib/actions";
 import { auth } from "@/lib/auth";
 
 const links = [
@@ -25,13 +25,15 @@ const links = [
   },
 ];
 
-const Links = async () => {
+const Links =async () => {
   const [open, setOpen] = useState(false);
 
   //TEMPORARY
   const session = await auth();
-  // console.log(session);
+  // console.log("session:", session);
+  
   // const isAdmin = true;
+
 
   return (
     <div className={styles.container}>
@@ -41,7 +43,7 @@ const Links = async () => {
         ))}
         {session?.user ? (
           <>
-            {session.user?.isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
+            {session.user?.isAdmin ? <NavLink item={{ title: "Admin", path: "/admin" }} /> : <NavLink item={{ title: "User", path: "/user" }} />}
             <form action={handleGithubLogout}>
               <button className={styles.logout}>Logout</button>
             </form>

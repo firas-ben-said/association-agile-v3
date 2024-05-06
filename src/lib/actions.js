@@ -40,16 +40,17 @@ export const addUser = async (prevState, formData) => {
 
         await newUser.save();
         console.log("User added successfully");
-        revalidatePath("/admin");
+        // revalidatePath("/admin");
     } catch (err) {
         console.error(err);
         return { error: "An error occurred" };
     }
-
+    revalidatePath("/admin/users");
+    redirect("/admin/users");
 };
 
 export const updateUser = async (formData) => {
-    const { id, fullname, username, email, password, img, phone } = Object.fromEntries(formData);
+    const { id, fullname, username, email, password, img, phone, isAdmin } = Object.fromEntries(formData);
 
     try {
         connectToDB();
@@ -61,6 +62,7 @@ export const updateUser = async (formData) => {
             password,
             img,
             phone,
+            isAdmin,
         };
 
         Object.keys(updateFields).forEach(
@@ -74,7 +76,8 @@ export const updateUser = async (formData) => {
         console.log(err);
         throw new Error("Failed to update user!");
     }
-    revalidatePath("/admin");
+    revalidatePath("/admin/users");
+    redirect("/admin/users");
 };
 
 export const deleteUser = async (formData) => {

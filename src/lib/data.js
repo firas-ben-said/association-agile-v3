@@ -36,7 +36,7 @@ export const getUser = async (id) => {
 };
 
 export const getUsers = async (q) => {
-
+    // console.log("q: ",q);
     const regex = new RegExp(q, "i");
     try {
         connectToDB();
