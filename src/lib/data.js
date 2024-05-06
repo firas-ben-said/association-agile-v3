@@ -35,10 +35,12 @@ export const getUser = async (id) => {
     }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (q) => {
+
+    const regex = new RegExp(q, "i");
     try {
         connectToDB();
-        const users = await User.find();
+        const users = await User.find({username:{ $regex: regex}});
         return users;
     } catch (error) {
         console.error(error);

@@ -5,6 +5,8 @@ import { signIn, signOut } from "./auth";
 import { Event, User } from "./models";
 import { connectToDB } from "./utils";
 import bcrypt from "bcryptjs";
+import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 export const addUser = async (prevState, formData) => {
     const { fullname, username, email, password, img, phone } = Object.fromEntries(formData);
@@ -68,11 +70,11 @@ export const updateUser = async (formData) => {
 
         await User.findByIdAndUpdate(id, updateFields);
         console.log("user updated successfully!");
-        revalidatePath("/admin");
     } catch (err) {
         console.log(err);
         throw new Error("Failed to update user!");
     }
+    revalidatePath("/admin");
 };
 
 export const deleteUser = async (formData) => {
@@ -90,7 +92,7 @@ export const deleteUser = async (formData) => {
     }
 };
 
-export const addEvent = async (prevState, formData) => {
+export const addEvent = async (formData) => {
     const { title, description, img, date, location, organizer, places } = Object.fromEntries(formData);
 
     try {
@@ -107,12 +109,12 @@ export const addEvent = async (prevState, formData) => {
 
         await newEvent.save();
         console.log("saved to db");
-        revalidatePath("/event");
-        revalidatePath("/admin");
     } catch (err) {
         console.log(err);
         return { error: "Something went wrong!" };
     }
+    revalidatePath("/admin/events");
+    redirect("/admin/events");
 };
 
 export const deleteEvent = async (formData) => {
@@ -123,12 +125,11 @@ export const deleteEvent = async (formData) => {
 
         await Event.findByIdAndDelete(id);
         console.log("deleted from db");
-        revalidatePath("/blog");
-        revalidatePath("/admin");
     } catch (err) {
         console.log(err);
         return { error: "Something went wrong!" };
     }
+    revalidatePath("/admin/events");
 };
 
 export const updateEvent = async (formData) => {
@@ -154,12 +155,12 @@ export const updateEvent = async (formData) => {
 
         await Product.findByIdAndUpdate(id, updateFields);
         console.log("event updated successfully!");
-        revalidatePath("/event");
-        revalidatePath("/admin");
     } catch (err) {
         console.log(err);
         throw new Error("Failed to update product!");
     }
+    revalidatePath("/admin/events");
+    redirect("/admin/events");
 };
 
 export const register = async (previousState, formData) => {
@@ -212,9 +213,10 @@ export const login = async (previousState, formData) => {
         await signIn("credentials", { username, password });
     } catch (err) {
         console.log(err);
-        if (err.message.includes("CredentialsSignin")) {
-            return { error: "Invalid username or password" };
-        }
+        // if (err.message.includes("CredentialsSignin")) {
+        //     return { error: "Invalid username or password" };
+        // }
+        // return { error: "An error occurred" };
         throw err;
     }
 }
