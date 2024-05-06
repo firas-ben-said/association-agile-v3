@@ -8,8 +8,9 @@ import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 // import { redirect } from "next/navigation";
 
-export const addUser = async (prevState, formData) => {
-    const { fullname, username, email, password, img, phone } = Object.fromEntries(formData);
+export const addUser = async (formData) => {
+    const { fullname, username, email, password, img, phone, isAdmin } = Object.fromEntries(formData);
+
 
     try {
         connectToDB();
@@ -36,6 +37,7 @@ export const addUser = async (prevState, formData) => {
             password: hashedPassword,
             img,
             phone,
+            isAdmin,
         });
 
         await newUser.save();
