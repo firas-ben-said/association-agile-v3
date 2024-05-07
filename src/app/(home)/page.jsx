@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './home.module.css';
-import News from '../components/news/News';
-import news from '../data/news.json';
+import News from '../../components/news/News';
+import news from "@/data/news.json";
 
 const Home = () => {
     return (
