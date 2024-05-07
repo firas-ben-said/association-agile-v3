@@ -1,11 +1,13 @@
-import NextAuth from "next-auth"
-import GitHub from "next-auth/providers/github"
+import NextAuth from "next-auth";
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google"; // Add Google provider
 import { connectToDB } from "./utils";
 import { User } from "./models";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { authConfig } from "./auth.config";
 import { isAbsoluteUrl } from "next/dist/shared/lib/utils";
+
 
 const login = async (credentials) => {
     try {
@@ -29,13 +31,23 @@ const login = async (credentials) => {
     }
 }
 
-
 export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
     ...authConfig,
     providers: [
         GitHub({
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
+        }),
+        Google({
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET,
+            authorization: {
+                params: {
+                  prompt: "consent",
+                  access_type: "offline",
+                  response_type: "code"
+                }
+            }
         }),
         CredentialsProvider({
             async authorize(credentials) {
@@ -50,7 +62,6 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
     ],
     callbacks: {
         async signIn({ user, account, profile }) {
-            // console.log("Sign in", user, account, profile);
             if (account.provider === "github") {
                 connectToDB();
                 try {

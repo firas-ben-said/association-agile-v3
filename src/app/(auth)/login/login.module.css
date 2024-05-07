@@ -1,10 +1,11 @@
-.container{
+.container {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh; /* Added to center the content vertically */
 }
 
-.wrapper{
+.wrapper {
   width: 500px;
   background-color: var(--bgSoft);
   padding: 50px;
@@ -15,7 +16,7 @@
   border-radius: 5px;
 }
 
-.github{
+.google, .github {
   width: 100%;
   padding: 20px;
   cursor: pointer;
@@ -24,4 +25,8 @@
   font-weight: bold;
   border: none;
   border-radius: 5px;
+}
+
+.github {
+  margin-top: 10px; /* Added margin to separate GitHub login button */
 }

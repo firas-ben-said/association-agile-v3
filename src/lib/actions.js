@@ -176,13 +176,12 @@ export const register = async (previousState, formData) => {
 
     try {
         connectToDB();
-        // check if username already exists
         const user = await User.findOne({ username });
 
         if (user) {
             return { error: "Username already exists!" };
         }
-        // check if email already exists
+
         const userEmail = await User.findOne({ email });
 
         if (userEmail) {
@@ -210,6 +209,12 @@ export const register = async (previousState, formData) => {
     }
 };
 
+
+
+
+
+
+
 export const login = async (previousState, formData) => {
     const { username, password } = Object.fromEntries(formData);
 
@@ -217,13 +222,9 @@ export const login = async (previousState, formData) => {
         await signIn("credentials", { username, password });
     } catch (err) {
         console.log(err);
-        // if (err.message.includes("CredentialsSignin")) {
-        //     return { error: "Invalid username or password" };
-        // }
-        // return { error: "An error occurred" };
         throw err;
     }
-}
+};
 
 export const handleGithubLogin = async () => {
     await signIn("github")
@@ -234,3 +235,9 @@ export const handleGithubLogout = async () => {
     //redirect to home
     redirect("/");
 };
+
+
+export const handleGoogleLogin = async () => {
+    await signIn("google");
+};
+
