@@ -3,10 +3,13 @@
 import { useState } from 'react';
 import { profile } from '@/components/main/Event/data';
 import Footer from '@/components/main/Footer/Footer';
+import { auth } from '@/lib/auth';
 
-export default function Profile() {
+const Profile = async () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    const session = await auth();
+    console.log(session);
     return (
         <div className="bg-white">
             <div className="relative isolate px-6 pt-14 xl:px-8 max-w-full">
@@ -34,11 +37,11 @@ export default function Profile() {
                                     <div className="mt-2">
                                         <div className="flex justify-between items-center py-2 border-b">
                                             <span className="text-zinc-600">Full-Name</span>
-                                            <span className="text-zinc-900">{profileData.fullname}</span>
+                                            <span className="text-zinc-900">{session.user.fullname}</span>
                                         </div>
                                         <div className="flex justify-between items-center py-2 border-b">
                                             <span className="text-zinc-600">Username</span>
-                                            <span className="text-zinc-900">{profileData.username}</span>
+                                            <span className="text-zinc-900">{session.user.username}</span>
                                         </div>
                                         <div className="flex justify-between items-center py-2 border-b">
                                             <span className="text-zinc-600">Role</span>
@@ -59,11 +62,11 @@ export default function Profile() {
                                     <div className="mt-2">
                                         <div className="flex justify-between items-center py-2 border-b">
                                             <span className="text-zinc-600">E-mail</span>
-                                            <span className="text-zinc-900">{profileData.email}</span>
+                                            <span className="text-zinc-900">{session.user.email}</span>
                                         </div>
                                         <div className="flex justify-between items-center py-2">
                                             <span className="text-zinc-600">Téléphone</span>
-                                            <span className="text-zinc-900">{profileData.telephone}</span>
+                                            <span className="text-zinc-900">{session.user.phone}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -76,3 +79,5 @@ export default function Profile() {
         </div>
     );
 }
+
+export default Profile;
