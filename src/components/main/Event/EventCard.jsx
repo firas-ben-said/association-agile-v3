@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const EventCard = ({ imageUrl, date, author, description }) => {
+const EventCard = ({ imageUrl, date, author, description, title }) => {
     const [enrolled, setEnrolled] = useState(false);
 
     const handleEnroll = () => {
@@ -17,6 +17,10 @@ const EventCard = ({ imageUrl, date, author, description }) => {
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img src={imageUrl} alt="Event image" className="w-full h-80 object-cover" />
             <div className="p-4">
+                <p className="text-sm text-zinc-600 font-bold text-3xl">
+                    {title}
+                </p>
+                <br />
                 <p className="text-sm text-zinc-600">
                     {date} • {author} <br/> <br/>
                     {description}
