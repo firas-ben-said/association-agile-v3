@@ -157,11 +157,11 @@ export const updateEvent = async (formData) => {
                 (updateFields[key] === "" || undefined) && delete updateFields[key]
         );
 
-        await Product.findByIdAndUpdate(id, updateFields);
+        await Event.findByIdAndUpdate(id, updateFields);
         console.log("event updated successfully!");
     } catch (err) {
         console.log(err);
-        throw new Error("Failed to update product!");
+        throw new Error("Failed to update event!");
     }
     revalidatePath("/admin/events");
     redirect("/admin/events");

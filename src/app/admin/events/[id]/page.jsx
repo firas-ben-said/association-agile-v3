@@ -28,7 +28,9 @@ const SingleEventPage = async ({ params }) => {
           <input type="date" name="date" />
           <label>Places</label>
           <input type="number" placeholder={Event.places} name="places" />
-
+          <label>Image URL</label>
+          <input type="text" placeholder={Event.img} name="img" />
+          
           <label>Description</label>
           <textarea
             name="desc"

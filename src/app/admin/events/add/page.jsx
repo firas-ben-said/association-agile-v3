@@ -10,12 +10,11 @@ const AddEvent = () => {
         <input type="text" placeholder="organizer" name="organizer" />
         <input type="date" name="date" />
         <input type="number" placeholder="places" name="places" />
-        {/* <input
-          type="file"
-          id="img_upload"
+        <input
+          type="text"
           name="img"
-          accept="image/*"
-        /> */}
+          placeholder="type image url"
+        />
         <textarea
           name="description"
           id="desc"
