@@ -15,6 +15,7 @@ import MenuLink from "./menuLink/menuLink";
 import Image from "next/image";
 import Link from "next/link";
 import { auth, signOut } from "@/lib/auth";
+import { handleGithubLogout } from "@/lib/actions";
 
 
 const menuItems = [
@@ -44,18 +45,8 @@ const menuItems = [
     ],
   },
   {
-    title: "Analytics",
+    title: "Office",
     list: [
-      {
-        title: "Revenue",
-        path: "/dashboard/revenue",
-        icon: <MdWork />,
-      },
-      {
-        title: "Reports",
-        path: "/dashboard/reports",
-        icon: <MdAnalytics />,
-      },
       {
         title: "Teams",
         path: "/dashboard/teams",
@@ -109,10 +100,7 @@ const Sidebar = async () => {
         ))}
       </ul>
       {/* <Link href="/login"> */}
-        <form action={async () => {
-            "use server";
-            await signOut();
-        }}>
+        <form action={handleGithubLogout}>
           <button className={styles.logout}>
             <MdLogout />
             Logout

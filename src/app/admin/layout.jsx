@@ -3,7 +3,7 @@ import Footer from "@/components/dashboard/footer/footer";
 import Navbar from "@/components/dashboard/navbar/navbar";
 import Sidebar from "@/components/dashboard/sidebar/sidebar";
 import { Inter } from "next/font/google";
-import "../(home)/globals.css";
+import "./admin.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

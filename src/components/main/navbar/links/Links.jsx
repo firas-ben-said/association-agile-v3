@@ -3,8 +3,8 @@
 import { useState } from "react";
 import styles from "./Links.module.css";
 import NavLink from "./navLink/NavLink";
-import { handleGithubLogout} from "@/lib/actions";
 import { auth } from "@/lib/auth";
+import { handleGithubLogout } from "@/lib/actions";
 
 const links = [
   {
@@ -25,15 +25,10 @@ const links = [
   },
 ];
 
-const Links =async () => {
+const Links = async () => {
   const [open, setOpen] = useState(false);
 
-  //TEMPORARY
   const session = await auth();
-  // console.log("session:", session);
-  
-  // const isAdmin = true;
-
 
   return (
     <div className={styles.container}>

@@ -6,7 +6,6 @@ import { Event, User } from "./models";
 import { connectToDB } from "./utils";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
-// import { redirect } from "next/navigation";
 
 export const addUser = async (formData) => {
     const { fullname, username, email, password, img, phone, isAdmin } = Object.fromEntries(formData);
@@ -232,4 +231,6 @@ export const handleGithubLogin = async () => {
 
 export const handleGithubLogout = async () => {
     await signOut();
+    //redirect to home
+    redirect("/");
 };

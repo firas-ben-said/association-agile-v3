@@ -1,3 +1,5 @@
+import { revalidatePath } from "next/cache";
+
 export const authConfig = {
     pages:{
         signIn: "/login",
@@ -28,9 +30,10 @@ export const authConfig = {
             const isOnEventPage = request.nextUrl?.pathname.startsWith("/event");
             const isOnLoginPage = request.nextUrl?.pathname.startsWith("/login");
 
+
             // ONLY ADMINS CAN ACCESS THE ADMIN PANEL
             if (isOnAdminPanel && !user?.isAdmin) {
-                return false;
+                return Response.redirect(new URL("/", request.nextUrl));
             }
 
 
@@ -39,9 +42,6 @@ export const authConfig = {
             if (isOnEventPage && !user) {
                 return false;
             }
-
-
-
 
 
             // ONLY AUTHENTICATED USERS CAN ACCESS THE LOGIN PAGE
