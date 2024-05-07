@@ -1,12 +1,14 @@
 "use client"
 
+import Link from 'next/link'
 import styles from './navbar.module.css'
 import { usePathname } from 'next/navigation'
 import {
     MdNotifications,
     MdOutlineChat,
     MdPublic,
-    MdSearch
+    MdSearch,
+    MdHome,
 } from 'react-icons/md'
 
 const Navbar = () => {
@@ -20,11 +22,15 @@ const Navbar = () => {
                     <MdSearch />
                     <input type="text" placeholder="Search" className={styles.input}/>
                 </div>
-                <div className={styles.icons}>
+                {/* <div className={styles.icons}>
                     <MdOutlineChat size={20}/>
                     <MdNotifications size={20}/>
                     <MdPublic size={20}/>
-                </div>
+                </div> */}
+                    <Link href="/" className={styles.home}>
+                        <MdHome size={20}/>
+                        <h3>Home</h3>
+                    </Link>
             </div>
         </div>
     );

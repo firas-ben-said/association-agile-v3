@@ -33,3 +33,17 @@
     border: none;
     color: var(--text);
 }
+
+.home{
+    padding: 20px;
+    margin: 5px 0px;
+    display: flex;
+    align-items: center;        
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: none;
+    border: none;
+    width: 100%;
+    color: white;
+}

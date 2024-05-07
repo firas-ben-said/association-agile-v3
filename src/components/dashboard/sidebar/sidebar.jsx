@@ -1,14 +1,12 @@
 import styles from "./sidebar.module.css";
 import {
   MdDashboard,
-  MdAttachMoney,
   MdShoppingBag,
-  MdWork,
-  MdAnalytics,
   MdPeople,
   MdOutlineSettings,
   MdHelpCenter,
   MdLogout,
+  MdHome,
 } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
 import MenuLink from "./menuLink/menuLink";
@@ -16,7 +14,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth, signOut } from "@/lib/auth";
 import { handleGithubLogout } from "@/lib/actions";
-
 
 const menuItems = [
   {
@@ -36,11 +33,6 @@ const menuItems = [
         title: "Events",
         path: "/admin/events",
         icon: <MdShoppingBag />,
-      },
-      {
-        title: "Transactions",
-        path: "/admin/transactions",
-        icon: <MdAttachMoney />,
       },
     ],
   },
@@ -86,7 +78,9 @@ const Sidebar = async () => {
         />
         <div className={styles.userDetail}>
           <span className={styles.userName}>{session.user.username}</span>
-          <span className={styles.userTitle}>{session.user.isAdmin ? "Admin" : "User"}</span>
+          <span className={styles.userTitle}>
+            {session.user.isAdmin ? "Admin" : "User"}
+          </span>
         </div>
       </div>
       <ul className={styles.list}>
@@ -99,14 +93,12 @@ const Sidebar = async () => {
           </li>
         ))}
       </ul>
-      {/* <Link href="/login"> */}
-        <form action={handleGithubLogout}>
-          <button className={styles.logout}>
-            <MdLogout />
-            Logout
-          </button>
-        </form>
-      {/* </Link> */}
+      <form action={handleGithubLogout}>
+        <button className={styles.logout}>
+          <MdLogout />
+          Logout
+        </button>
+      </form>
     </div>
   );
 };
