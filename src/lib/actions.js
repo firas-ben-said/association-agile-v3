@@ -168,7 +168,7 @@ export const updateEvent = async (formData) => {
 };
 
 export const register = async (previousState, formData) => {
-    const { fullname, username, email, password, passwordRepeat, img, phone } = Object.fromEntries(formData);
+    const { fullname, username, email, password, passwordRepeat, dob, img, phone, genre } = Object.fromEntries(formData);
 
     if (password !== passwordRepeat) {
         return { error: "Passwords do not match" };
@@ -198,6 +198,8 @@ export const register = async (previousState, formData) => {
             password: hashedPassword,
             img,
             phone,
+            dob,
+            genre,
         });
 
         await newUser.save();

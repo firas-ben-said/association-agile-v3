@@ -14,6 +14,12 @@ const userSchema = new mongoose.Schema({
         min : 3,
         max : 20
     },
+    dob: {
+        type: Date,
+    },
+    genre: {
+        type: String,
+    },
     email: {
         type: String,
         required: true,

@@ -28,6 +28,15 @@ const RegisterForm = () => {
         name="passwordRepeat"
         required
       />
+      <input type="date" name="dob" />
+      {/*genre*/}
+      <select name="genre" required>
+        <option value="">Select Genre</option>
+        <option value="Male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+
       <input type="tel" placeholder="Phone" name="phone" />
       {/* image upload */}
       {/* <label for="img_upload" class={styles.imgButton} >

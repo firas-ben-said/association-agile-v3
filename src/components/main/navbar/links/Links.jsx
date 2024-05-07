@@ -23,6 +23,10 @@ const links = [
     title: "Events",
     path: "#event",
   },
+  {
+    title: "Profile",
+    path: "/profile",
+  }
 ];
 
 const Links = async () => {

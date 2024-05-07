@@ -29,7 +29,7 @@ const Profile = async () => {
                     {profile.map((profileData, index) => (
                         <div key={index} className="flex flex-row p-8">
                             <div className="p-14">
-                                <img src={profileData.photo} className="rounded-full w-100 h-80 border-4 border-white" />
+                                <img src={session.user.img || "/noavatar.png"} className="rounded-full w-100 h-80 border-4 border-white" />
                             </div>
                             <div className="w-4/5 bg-white shadow-md rounded-xl p-6">
                                 <div className="mb-4">
@@ -45,7 +45,7 @@ const Profile = async () => {
                                         </div>
                                         <div className="flex justify-between items-center py-2 border-b">
                                             <span className="text-zinc-600">Role</span>
-                                            <span className="text-zinc-900">{profileData.role}</span>
+                                            <span className="text-zinc-900">{session.user?.isAdmin ? "Admin" : "User"}</span>
                                         </div>
                                         <div className="flex justify-between items-center py-2 border-b">
                                             <span className="text-zinc-600">Date of birth</span>
