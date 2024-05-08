@@ -23,10 +23,10 @@ const links = [
     title: "Events",
     path: "#event",
   },
-  {
-    title: "Profile",
-    path: "/profile",
-  }
+  // {
+  //   title: "Profile",
+  //   path: "/profile",
+  // }
 ];
 
 const Links = async () => {
@@ -41,7 +41,8 @@ const Links = async () => {
           <NavLink item={link} key={link.title} />
         ))}
         {session?.user ? (
-          <>
+          <>  
+            <NavLink item={{ title: "Profile", path: "/profile" }} />
             {session.user?.isAdmin ? <NavLink item={{ title: "Admin", path: "/admin" }} /> : <NavLink item={{ title: "User", path: "/user" }} />}
             <form action={handleGithubLogout}>
               <button className={styles.logout}>Logout</button>

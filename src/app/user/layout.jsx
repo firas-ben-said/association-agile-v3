@@ -8,7 +8,7 @@ import "./user.css";
 const inter = Inter({ subsets: ["latin"] });
 
 
-export default function AdminLayout({ children }) {
+export default function UserLayout({ children }) {
   return (
     <html>
       <body className={inter.className}>

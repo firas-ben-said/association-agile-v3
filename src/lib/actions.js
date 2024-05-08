@@ -333,7 +333,7 @@ export const handleGoogleLogin = async () => {
     await signIn("google");
 };
 
-export const getSessionData = async (context) => {
-    const session = await getSession(context);
-    return session?.user || null;
-}
+// export const getSessionData = async (context) => {
+//     const session = await getSession(context);
+//     return session?.user || null;
+// }

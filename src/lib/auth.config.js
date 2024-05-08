@@ -37,6 +37,7 @@ export const authConfig = {
         authorized({auth, request}){
             const user = auth?.user;
             const isOnAdminPanel = request.nextUrl?.pathname.startsWith("/admin");
+            const isOnUserPanel = request.nextUrl?.pathname.startsWith("/user");
             const isOnEventPage = request.nextUrl?.pathname.startsWith("/event");
             const isOnLoginPage = request.nextUrl?.pathname.startsWith("/login");
             const isOnProfilePage = request.nextUrl?.pathname.startsWith("/profile");
@@ -47,7 +48,13 @@ export const authConfig = {
                 return Response.redirect(new URL("/", request.nextUrl));
             }
 
+            // ONLY AUTHENTICATED USERS CAN ACCESS THE PROFILE PAGE
             if(isOnProfilePage && !user){
+                return Response.redirect(new URL("/", request.nextUrl));
+            }
+
+            // ONLY AUTHENTICATED USERS CAN ACCESS THE USER PANEL
+            if (isOnUserPanel && !user) {
                 return Response.redirect(new URL("/", request.nextUrl));
             }
 

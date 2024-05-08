@@ -5,7 +5,7 @@ import Rightbar from "@/components/dashboard/rightbar/rightbar";
 import Transactions from "@/components/dashboard/transactions/transactions";
 
 
-const AdminPage = () => {
+const UserPage = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.main}>
@@ -24,4 +24,4 @@ const AdminPage = () => {
     );
 }
 
-export default AdminPage;
+export default UserPage;
