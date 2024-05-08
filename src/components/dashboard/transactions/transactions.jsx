@@ -4,7 +4,7 @@ import Image from "next/image";
 const Transactions = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Latest Transactions</h2>
+      <h2 className={styles.title}>Latest Donation</h2>
       <table className={styles.table}>
         <thead>
           <tr>

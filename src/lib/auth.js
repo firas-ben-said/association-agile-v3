@@ -7,6 +7,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { authConfig } from "./auth.config";
 import { isAbsoluteUrl } from "next/dist/shared/lib/utils";
+import credentials from "next-auth/providers/credentials";
 
 
 const login = async (credentials) => {

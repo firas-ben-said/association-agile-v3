@@ -21,6 +21,9 @@ const LoginForm = () => {
     <form className={styles.form} action={formAction}>
       <input type="text" placeholder="username" name="username" />
       <input type="password" placeholder="password" name="password" />
+      <Link href="/forgetPassword" className={styles.forget}>
+        <b>Forget password?</b>
+      </Link>
       <button>Login</button>
       {state?.err}
       <Link href="/register">

@@ -1,10 +1,10 @@
 import React from 'react';
 import EventCard from '../Event/EventCard';
-import {events} from '../Event/data';
+// import {events} from '../Event/data';
 import { getEvents } from '@/lib/data';
 
 const Features = async () => {
-    const events = await getEvents();
+    const {events}= await getEvents();
 
     return (
         <section className={"bg-gray-800 text-white"} id='event'>

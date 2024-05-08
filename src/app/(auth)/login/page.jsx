@@ -1,7 +1,7 @@
 import { handleGithubLogin, handleGoogleLogin } from "@/lib/actions"; // Assuming you have a function for handling Google login
 import styles from "./login.module.css";
 import { auth } from "@/lib/auth";
-import LoginForm from "@/components/loginForm/LoginForm";
+import LoginForm from "@/components/auth/loginForm/LoginForm";
 
 const LoginPage = async () => {
 

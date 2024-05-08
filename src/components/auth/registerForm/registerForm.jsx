@@ -24,13 +24,13 @@ const RegisterForm = () => {
       <input type="password" placeholder="password" name="password" required />
       <input
         type="password"
-        placeholder="password again"
+        placeholder="Confirm password"
         name="passwordRepeat"
         required
       />
       <input type="date" name="dob" />
       {/*genre*/}
-      <select name="genre" required>
+      <select name="genre" id="genre" required>
         <option value="">Select Genre</option>
         <option value="Male">Male</option>
         <option value="female">Female</option>

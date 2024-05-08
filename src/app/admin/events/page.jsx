@@ -2,17 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "@/components/dashboard/events/events.module.css";
 import Search from "@/components/dashboard/search/search";
-// import Pagination from "@/app/ui/dashboard/pagination/pagination";
+import Pagination from "@/components/dashboard/pagination/pagination";
 import { getEvents } from "@/lib/data";
 import { deleteEvent } from "@/lib/actions";
 
 const EventPage = async ({searchParams}) => {
-  // const q = searchParams?.q || "";
-  // const page = searchParams?.page || 1;
-  // const { count, products } = await fetchProducts(q, page);
+  const q = searchParams?.q || "";
+  const page = searchParams?.page || 1;
 
-  const events = await getEvents();
-  // console.log(events);
+  const {count, events} = await getEvents(q, page);
 
   return (
     <div className={styles.container}>
@@ -73,7 +71,7 @@ const EventPage = async ({searchParams}) => {
           ))}
         </tbody>
       </table>
-      {/* <Pagination count={count} /> */}
+      <Pagination count={count} />
     </div>
   );
 };

@@ -13,6 +13,8 @@ export const authConfig = {
                 token.username = user.username;
                 token.email = user.email;
                 token.phone = user.phone;
+                token.dob = user.dob;
+                token.genre = user.genre;
                 token.img = user.img;
                 token.isAdmin = user.isAdmin;
             }
@@ -25,9 +27,12 @@ export const authConfig = {
                 session.user.username = token.username;
                 session.user.email = token.email;
                 session.user.phone = token.phone;
+                session.user.dob = token.dob;
+                session.user.genre = token.genre;
                 session.user.img = token.img;
                 session.user.isAdmin = token.isAdmin;
             }
+            return session;
         },
         authorized({auth, request}){
             const user = auth?.user;

@@ -1,11 +1,17 @@
-import { Event, User } from "./models";
+import { session } from "./actions";
+import { Event, Token, User } from "./models";
 import { connectToDB } from "./utils";
 
-export const getEvents = async () => {
+export const getEvents = async (q, page) => {
+    const regex = new RegExp(q, "i");
+
+    const eventPerPage = 5;
+
     try {
         connectToDB();
-        const events = await Event.find();
-        return events;
+        const count = await Event.find({ title: { $regex: regex }}).count();
+        const events = await Event.find({ title: { $regex: regex }}).limit(eventPerPage).skip(eventPerPage * (page - 1));
+        return {count, events};
     } catch (error) {
         console.error(error);
         throw new Error("failed to fetch events");
@@ -35,15 +41,40 @@ export const getUser = async (id) => {
     }
 };
 
-export const getUsers = async (q) => {
-    // console.log("q: ",q);
+export const getUsers = async (q,page) => {
     const regex = new RegExp(q, "i");
+
+    const userPerPage = 5;
     try {
         connectToDB();
-        const users = await User.find({username:{ $regex: regex}});
-        return users;
+        const count = await User.find({username:{ $regex: regex}}).count();
+        const users = await User.find({username:{ $regex: regex}}).limit(userPerPage).skip(userPerPage * (page-1));
+        return {users, count};
     } catch (error) {
         console.error(error);
         throw new Error("failed to fetch users");
     }
 };
+
+
+export const getPasswordResetTokenByToken = async (token) => {
+    try {
+        const passwordResetToken = await Token.findOne({ token });
+
+        return passwordResetToken;
+    } catch (err) {
+        console.log(err);
+        throw new Error("failed to fetch token");
+    }
+}
+
+export const getPasswordResetTokenByEmail= async (email) => {
+    try {
+        const passwordResetToken = await Token.findOne({ email });
+
+        return passwordResetToken;
+    } catch (err) {
+        console.log(err);
+        throw new Error("failed to fetch token");
+    }
+}

@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    fullname:{
+    fullname: {
         type: String,
         required: true,
-        min : 3,
-        max : 20
+        min: 3,
+        max: 20
     },
     username: {
         type: String,
         required: true,
-        unique : true,
-        min : 3,
-        max : 20
+        unique: true,
+        min: 3,
+        max: 20
     },
     dob: {
         type: Date,
@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique : true
+        unique: true
     },
     password: {
         type: String,
@@ -36,19 +36,19 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     phone: {
-        type: String,   
+        type: String,
     },
 }
-, { timestamps: true }
+    , { timestamps: true }
 );
 
 const eventSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        unique : true,
-        min : 3,
-        max : 20
+        unique: true,
+        min: 3,
+        max: 20
     },
     description: {
         type: String,
@@ -74,8 +74,27 @@ const eventSchema = new mongoose.Schema({
         required: true
     },
 },
-{ timestamps: true }
+    { timestamps: true }
 );
+
+const tokenSchema  = new mongoose.Schema({
+    id: {
+        type: String,
+        unique: true
+    },
+    email : {
+        type: String,
+        
+    },
+    token: {
+        type: String,
+        unique: true,
+    },
+    expires :{
+        type: Date,
+    }
+})
 
 export const User = mongoose.models?.User || mongoose.model('User', userSchema);
 export const Event = mongoose.models?.Event || mongoose.model('Event', eventSchema);
+export const Token = mongoose.models?.Token || mongoose.model('Token', tokenSchema);

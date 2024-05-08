@@ -1,16 +1,19 @@
 import styles from "@/components/dashboard/users/users.module.css";
 import Link from "next/link";
 import Image from "next/image";
-// import Pagination from "@/components/dashboard/pagination/pagination";
+import Pagination from "@/components/dashboard/pagination/pagination";
 import { getUsers } from "@/lib/data";
 import { deleteUser } from "@/lib/actions";
 import Search from "@/components/dashboard/search/search";
 
 
 const UsersPage = async ({ searchParams }) => {
-  const q = searchParams?.query || "";
+  const q = searchParams?.q || "";
+  const page = searchParams?.page || 1;
   
-  const users = await getUsers(q);
+  const {count, users} = await getUsers(q,page);
+
+
 
   return (
     <div className={styles.container}>
@@ -71,7 +74,7 @@ const UsersPage = async ({ searchParams }) => {
           ))}
         </tbody>
       </table>
-      {/* <Pagination count={count} /> */}
+      <Pagination count={count} />
     </div>
   );
 };

@@ -1,11 +1,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { signIn, signOut } from "./auth";
-import { Event, User } from "./models";
+import { auth, signIn, signOut } from "./auth";
+import { Event, Token, User } from "./models";
 import { connectToDB } from "./utils";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
+import { getPasswordResetTokenByEmail, getPasswordResetTokenByToken } from "./data";
+import sendResetPasswordEmail from "./sendMail";
+import { v4 as uuidv4 } from "uuid";
+import { getSession } from "next-auth/react";
 
 export const addUser = async (formData) => {
     const { fullname, username, email, password, img, phone, isAdmin } = Object.fromEntries(formData);
@@ -67,7 +71,7 @@ export const updateUser = async (formData) => {
         };
 
         Object.keys(updateFields).forEach(
-            (key) => 
+            (key) =>
                 (updateFields[key] === "" || undefined) && delete updateFields[key]
         );
 
@@ -153,7 +157,7 @@ export const updateEvent = async (formData) => {
         };
 
         Object.keys(updateFields).forEach(
-            (key) => 
+            (key) =>
                 (updateFields[key] === "" || undefined) && delete updateFields[key]
         );
 
@@ -222,6 +226,98 @@ export const login = async (previousState, formData) => {
     }
 };
 
+export const generateResetToken = async (email) => {
+    const token = uuidv4();
+    const expires = new Date(new Date().getTime() + 3600 * 1000); // 1 hour
+
+    const existingToken = await getPasswordResetTokenByEmail(email);
+
+    if (existingToken) {
+        await Token.findByIdAndDelete(existingToken._id);
+    };
+
+    const passwordResetToken = new Token({
+        id: uuidv4(),
+        email,
+        token,
+        expires,
+    });
+
+    await passwordResetToken.save();
+    return passwordResetToken;
+}
+
+export const forgetPassword = async (formData) => {
+    const { email } = Object.fromEntries(formData);
+
+    if (!email) {
+        return { error: "Email is required!" };
+    }
+
+    try {
+        connectToDB();
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return { error: "Email provided does not exist!" };
+        }
+
+        const passwordResetToken = await generateResetToken(email);
+        // console.log(passwordResetToken)
+        await sendResetPasswordEmail(passwordResetToken.email, passwordResetToken.token);
+        console.log("Email sent successfully!");
+    } catch (err) {
+        console.log(err);
+        throw new Error("failed to send reset email!");
+    }
+};
+
+export const resetPassword = async (token, password, confirmPassword) => {
+    if (!token) return { error: "Missing token" };
+
+    // const { password, confirmPassword } = Object.fromEntries(formData);
+
+    if (password !== confirmPassword) {
+        return { error: "Passwords do not match" };
+    }
+
+    try {
+        connectToDB();
+        const existingToken = await getPasswordResetTokenByToken(token);
+
+        if (!existingToken) {
+            return { error: "Invalid token" };
+        }
+
+        const hasExpired = new Date() > existingToken.expires;
+
+        if (hasExpired) {
+            return { error: "Token has expired" };
+        }
+
+        const existingUser = await User.findOne({ email: existingToken.email });
+
+        if (!existingUser) {
+            return { error: "User not found" };
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        await User.findByIdAndUpdate(existingUser._id, { password: hashedPassword});
+
+        await Token.findById(existingToken._id).deleteOne();
+        console.log(password)
+        console.log("Password reset successfully!");
+        return { success: true };
+        
+    } catch (err) {
+        console.log(err);
+        throw new Error("failed to reset password");
+    }
+   
+}
+
 export const handleGithubLogin = async () => {
     await signIn("github")
 };
@@ -237,3 +333,7 @@ export const handleGoogleLogin = async () => {
     await signIn("google");
 };
 
+export const getSessionData = async (context) => {
+    const session = await getSession(context);
+    return session?.user || null;
+}
