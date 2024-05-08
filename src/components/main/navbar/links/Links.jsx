@@ -23,6 +23,10 @@ const links = [
     title: "Events",
     path: "#event",
   },
+  {
+    title: "Customer support",
+    path: "/chat",
+  },
   // {
   //   title: "Profile",
   //   path: "/profile",
